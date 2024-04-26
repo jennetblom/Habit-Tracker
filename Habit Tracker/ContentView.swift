@@ -11,12 +11,26 @@ import Firebase
 struct ContentView : View {
     
     @State var signedIn : Bool = false
+    @State private var selectedTab = 1
     
     var body: some View {
         if !signedIn {
             SignInView(signedIn: $signedIn)
         } else {
-            HabitListView()
+            TabView(selection: $selectedTab) {
+                AddHabitView()
+                    .tabItem {
+                        Label("Create new habits", systemImage: "plus.circle")
+                    }.tag(0)
+                HabitListView()
+                    .tabItem {
+                        Label("Habits",systemImage: "list.bullet.clipboard")
+                    }.tag(1)
+                HabitsSummaryView()
+                    .tabItem {
+                        Label("Summary", systemImage: "person")
+                    }.tag(2)
+            }
         }
     }
 }
@@ -57,8 +71,16 @@ struct SignInView : View {
                         .foregroundColor(.white)
                 }.background(Color.blue)
                     .cornerRadius(10)
+            }.onAppear() {
+                signedIn = checkIfLoggedIn()
             }
         }
+    }
+    func checkIfLoggedIn() -> Bool{
+        if let currentUser = auth.currentUser {
+            return true
+        }
+        return false
     }
     func createUser() {
         auth.createUser(withEmail: email, password: password){
@@ -84,42 +106,7 @@ struct SignInView : View {
     }
         
 }
-struct HabitListView: View {
-    
-    @StateObject var habitsViewModel = HabitsViewModel()
-    
-    var body: some View {
-   
-        VStack{
-            List{
-                ForEach(habitsViewModel.habits){ habit in
-                    RowView(habit: habit, habitsViewModel: habitsViewModel)
-                    
-                }
-            }
-        }.onAppear() {
-            habitsViewModel.listenToFirestore()
-        }
-        
-    }
 
-}
-struct RowView: View {
-    let habit : Habit
-    let habitsViewModel : HabitsViewModel
-    var body: some View {
-        HStack{
-            Text(habit.name)
-            Spacer()
-            Button(action: {
-                habitsViewModel.toggle(habit: habit)
-            }) {
-                Image(systemName: habit.done ? "checkmark.square" : "square")
-            }
-            
-        }
-    }
-}
 
 #Preview {
     ContentView()
