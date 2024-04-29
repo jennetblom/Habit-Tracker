@@ -34,7 +34,7 @@ class HabitsViewModel : ObservableObject {
         do{
             try habitsRef.addDocument(from: habit)
         } catch {
-            print("Error saving to db")
+            print("Error saving to db \(error.localizedDescription)")
         }
     }
     func listenToFirestore() {
@@ -55,7 +55,7 @@ class HabitsViewModel : ObservableObject {
                         let habit = try document.data(as: Habit.self)
                         self.habits.append(habit)
                     } catch{
-                        print("Error reading from db")
+                        print("Error reading from db \(error.localizedDescription)")
                     }
                 }
             }
