@@ -30,7 +30,8 @@ struct ContentView : View {
                     .tabItem {
                         Label("Summary", systemImage: "person")
                     }.tag(2)
-            }
+                
+            }.accentColor(.mint)
         }
     }
 }

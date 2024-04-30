@@ -91,6 +91,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DDD531E2BE0E33600A2978F /* Create New Habits */ = {
+			isa = PBXGroup;
+			children = (
+				5D27FD0B2BDBAD0F004A1DF7 /* AddHabitView.swift */,
+			);
+			path = "Create New Habits";
+			sourceTree = "<group>";
+		};
+		5DDD531F2BE0E34F00A2978F /* Habits list */ = {
+			isa = PBXGroup;
+			children = (
+				5D27FD0F2BDBCD8D004A1DF7 /* HabitListView.swift */,
+				5DE854032BD65F9C00D176F6 /* ContentView.swift */,
+			);
+			path = "Habits list";
+			sourceTree = "<group>";
+		};
+		5DDD53202BE0E35C00A2978F /* Summary of habits */ = {
+			isa = PBXGroup;
+			children = (
+				5D27FD0D2BDBB09F004A1DF7 /* HabitsSummaryView.swift */,
+			);
+			path = "Summary of habits";
+			sourceTree = "<group>";
+		};
 		5DE853F52BD65F9C00D176F6 = {
 			isa = PBXGroup;
 			children = (
@@ -114,16 +139,15 @@
 		5DE854002BD65F9C00D176F6 /* Habit Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				5DBDA72D2BD7EDB900E44685 /* GoogleService-Info.plist */,
 				5DE854012BD65F9C00D176F6 /* Habit_TrackerApp.swift */,
-				5DE854032BD65F9C00D176F6 /* ContentView.swift */,
-				5DE854052BD65F9E00D176F6 /* Assets.xcassets */,
-				5DE854072BD65F9E00D176F6 /* Preview Content */,
 				5DBDA71E2BD7E8D400E44685 /* Habit.swift */,
 				5DBDF9112BDA6B6B008BFD07 /* HabitsViewModel.swift */,
-				5D27FD0B2BDBAD0F004A1DF7 /* AddHabitView.swift */,
-				5D27FD0D2BDBB09F004A1DF7 /* HabitsSummaryView.swift */,
-				5D27FD0F2BDBCD8D004A1DF7 /* HabitListView.swift */,
+				5DBDA72D2BD7EDB900E44685 /* GoogleService-Info.plist */,
+				5DDD531E2BE0E33600A2978F /* Create New Habits */,
+				5DDD531F2BE0E34F00A2978F /* Habits list */,
+				5DDD53202BE0E35C00A2978F /* Summary of habits */,
+				5DE854052BD65F9E00D176F6 /* Assets.xcassets */,
+				5DE854072BD65F9E00D176F6 /* Preview Content */,
 			);
 			path = "Habit Tracker";
 			sourceTree = "<group>";

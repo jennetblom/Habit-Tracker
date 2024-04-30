@@ -22,7 +22,7 @@ struct HabitListView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .padding()
-                
+                Text("\(checkDate())")
                 List{
                     ForEach(habitsViewModel.habits){ habit in
                         RowView(habit: habit, habitsViewModel: habitsViewModel)
@@ -35,30 +35,41 @@ struct HabitListView: View {
             }
             
         }
-    
+    func checkDate() ->String {
+        guard let date = habitsViewModel.habits.first?.formattedDate else {
+            return "No date available"
+        }
+        return date
+    }
 
 }
 
 struct RowView: View {
+    var imageName : String = ""
     let habit : Habit
     let habitsViewModel : HabitsViewModel
     var body: some View {
         HStack{
             Text(habit.name)
-//                .font(.caption)
-//            Text(habit.formattedDate ?? "")
             Text("\(habit.getStreakCount())")
             Spacer()
             Button(action: {
                 habitsViewModel.toggle(habit: habit)
             }) {
-                Image(systemName: habit.done ? "star.square" : "square")
+                Image(systemName: habit.done ?  "heart.square" : "square")
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(.purple)
                     .frame(width: 40)
+                    .foregroundStyle(checkColorImage(imageName: habit.done ? "heart.square" : "square"), .black)
             }
             
         }
+    }
+    func checkColorImage(imageName: String) -> Color{
+        
+        if imageName == "heart.square" {
+            return Color(red: 255.0/255, green: 3.0/255, blue: 144.0/255)
+        }
+        return .black
     }
 }
