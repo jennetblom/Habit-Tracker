@@ -32,6 +32,8 @@ struct HabitListView: View {
             .navigationTitle("What habits have you done today?")
             .onAppear() {
                 habitsViewModel.listenToFirestore()
+                
+                
             }
             
         }
@@ -48,13 +50,17 @@ struct RowView: View {
     var imageName : String = ""
     let habit : Habit
     let habitsViewModel : HabitsViewModel
+    @State var streakCount = 0
     var body: some View {
         HStack{
             Text(habit.name)
-            Text("\(habit.getStreakCount())")
+            Text("\(streakCount)")
             Spacer()
             Button(action: {
                 habitsViewModel.toggle(habit: habit)
+                streakCount = habit.getStreakCount()
+                print("Streak: \(streakCount)")
+                print("\(habit.daysDone.count)")
             }) {
                 Image(systemName: habit.done ?  "heart.square" : "square")
                     .resizable()
@@ -63,6 +69,8 @@ struct RowView: View {
                     .foregroundStyle(checkColorImage(imageName: habit.done ? "heart.square" : "square"), .black)
             }
             
+        }.onAppear(){
+            streakCount = habit.getStreakCount()
         }
     }
     func checkColorImage(imageName: String) -> Color{
