@@ -21,10 +21,36 @@ class HabitsViewModel : ObservableObject {
         
         if let id = habit.id {
             habitsRef.document(id).updateData(["done" : !habit.done])
+            
+            toggleHabitDate(habit: habit)
         }
         
     }
-    func saveToFirestore (habitName : String) {
+    func toggleHabitDate(habit: Habit){
+        guard let user = auth.currentUser else {return}
+        let habitsRef = db.collection("users").document(user.uid).collection("habits")
+        
+        if let id = habit.id {
+            let habitDocumentRef = habitsRef.document(id)
+            
+            let today = Calendar.current.startOfDay(for: Date())
+            
+            habitDocumentRef.getDocument{ (document, error) in
+                if let document = document, document.exists {
+                    let habitData = document.data()
+                    let habitDone = habitData?["done"] as? Bool ?? false
+                    
+                    if habitDone {
+                        habitDocumentRef.updateData(["daysDone" : FieldValue.arrayUnion([today])])
+                    } else if !habitDone {
+                        habitDocumentRef.updateData(["daysDone" : FieldValue.arrayRemove([today])])
+                    }
+                }
+            }
+        }
+    }
+
+    func saveNewHabitToFirestore (habitName : String) {
         
         guard let user = auth.currentUser else {return}
         let habitsRef = db.collection("users").document(user.uid).collection("habits")
@@ -58,6 +84,16 @@ class HabitsViewModel : ObservableObject {
                         print("Error reading from db \(error.localizedDescription)")
                     }
                 }
+            }
+        }
+    }
+    func updateDaysDone(habit : Habit) {
+        guard let user = auth.currentUser else {return}
+        let habitsRef = db.collection("users").document(user.uid).collection("habits")
+                   
+        if let id = habit.id {
+            if habit.done {
+                habitsRef.document(id).updateData(["daysDone" : [habit.date]])
             }
         }
     }

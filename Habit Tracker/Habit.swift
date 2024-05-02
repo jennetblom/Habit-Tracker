@@ -8,22 +8,20 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Habit : Codable, Identifiable {
+class Habit : Codable, Identifiable {
     @DocumentID var id : String?
     
     var name : String = ""
     var category : String = ""
     var done : Bool = false
+    var streakCount : Int = 0
     @ServerTimestamp var date:Date? = nil
     var daysDone : [Date] = []
     
-    
-//    init(name: String) {
-//        self.id = nil
-//        self.name = name
-//        self.category = ""
-//        self.done = false
-//    }
+    init(name: String) {
+        self.name = name
+        self.date = Date()
+    }
     var formattedDate : String? {
         guard let date = date else {
             return nil
@@ -32,31 +30,39 @@ struct Habit : Codable, Identifiable {
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: date )
     }
+    func diff(numDays : Int) -> Date? {
+        if let date = date {
+            return Calendar.current.date(byAdding: .day, value: numDays, to: date)
+        }
+        return nil
+    }
     func getStreakCount() -> Int {
         
-        guard !daysDone.isEmpty else {return 0}
+        var streak = 0
         
-        var streakCount = 0
-        var currentStreak = 1
-        
-        for i in 1..<daysDone.count {
-            let previousDate = daysDone[i - 1]
-            let currentDate = daysDone[i]
-            
-            if Calendar.current.isDate(previousDate, inSameDayAs: currentDate.addingTimeInterval(-86400)) {
-                currentStreak += 1
-            } else {
-                streakCount = max(streakCount,currentStreak)
-            }
+        guard !daysDone.isEmpty else {
+            print("daysDone is empty")
+            return 0
         }
         
-        streakCount = max(streakCount, currentStreak)
-        return streakCount
+        for i in stride(from: daysDone.count - 1, through: 0, by: -1){
+            let habitDate = diff(numDays: i - daysDone.count + 1 )
+            print("HabitDate: \(habitDate)")
+            if let habitDate = habitDate, daysDone.contains(habitDate){
+                streak += 1
+                print("streak \(streak)")
+            } else {
+                print("Break on date: \(habitDate)")
+                break
+            }
+        }
+        return streak
+    }
+    func handleDone() {
+        guard !daysDone.isEmpty else {return}
+        
+        
         
     }
-//    func formattedDate(from date: Date) -> String {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .medium
-//        return dateFormatter.string(from: date)
-//    }
+    
 }

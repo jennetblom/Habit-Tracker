@@ -22,7 +22,8 @@ struct AddHabitView: View {
         }
     }
     func saveHabit() {
-        habitsViewModel.saveToFirestore(habitName: habitName)
+        habitsViewModel.saveNewHabitToFirestore(habitName: habitName)
+        habitName = ""
     }
 }
 
