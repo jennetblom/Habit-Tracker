@@ -36,33 +36,4 @@ class Habit : Codable, Identifiable {
         }
         return nil
     }
-    func getStreakCount() -> Int {
-        
-        var streak = 0
-        
-        guard !daysDone.isEmpty else {
-            print("daysDone is empty")
-            return 0
-        }
-        
-        for i in stride(from: daysDone.count - 1, through: 0, by: -1){
-            let habitDate = diff(numDays: i - daysDone.count + 1 )
-            print("HabitDate: \(habitDate)")
-            if let habitDate = habitDate, daysDone.contains(habitDate){
-                streak += 1
-                print("streak \(streak)")
-            } else {
-                print("Break on date: \(habitDate)")
-                break
-            }
-        }
-        return streak
-    }
-    func handleDone() {
-        guard !daysDone.isEmpty else {return}
-        
-        
-        
-    }
-    
 }
