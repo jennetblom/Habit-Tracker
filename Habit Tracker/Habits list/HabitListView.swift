@@ -14,6 +14,7 @@ struct HabitListView: View {
     
     @StateObject var habitsViewModel = HabitsViewModel()
     
+    
     var body: some View {
         
         
@@ -54,13 +55,12 @@ struct RowView: View {
     var body: some View {
         HStack{
             Text(habit.name)
-            Text("\(streakCount)")
+            Text("\(habit.streakCount)")
             Spacer()
             Button(action: {
+                
                 habitsViewModel.toggle(habit: habit)
-                streakCount = habit.getStreakCount()
-                print("Streak: \(streakCount)")
-                print("\(habit.daysDone.count)")
+                
             }) {
                 Image(systemName: habit.done ?  "heart.square" : "square")
                     .resizable()
@@ -70,7 +70,6 @@ struct RowView: View {
             }
             
         }.onAppear(){
-            streakCount = habit.getStreakCount()
         }
     }
     func checkColorImage(imageName: String) -> Color{
