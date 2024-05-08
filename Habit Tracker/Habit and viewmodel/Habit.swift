@@ -30,10 +30,16 @@ class Habit : Codable, Identifiable {
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: date )
     }
-    func diff(numDays : Int) -> Date? {
-        if let date = date {
-            return Calendar.current.date(byAdding: .day, value: numDays, to: date)
+    func diff(numDays: Int, to date : Date) -> Date {
+        
+        
+        if let newDate = Calendar.current.date(byAdding: .day, value: numDays, to: date) {
+//            print("newDate: \(newDate)")
+            return newDate
+        } else {
+            // Hantera fallet där nytt datum inte kan beräknas
+            return Date()
         }
-        return nil
     }
+   
 }

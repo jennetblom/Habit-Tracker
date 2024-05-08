@@ -38,6 +38,7 @@ class HabitsViewModel : ObservableObject {
     }
     func updateDaysDone(habitDocumentRef : DocumentReference, done: Bool){
         let today = Calendar.current.startOfDay(for: Date())
+//        let today = Date()
         
         if done {
             habitDocumentRef.updateData(["daysDone" : FieldValue.arrayUnion([today])])
@@ -118,36 +119,71 @@ class HabitsViewModel : ObservableObject {
             }
         }
     }
-    func countStreakCount(habit : Habit) {
+    func fetchHabits() {
+        guard let user = auth.currentUser else { return }
+        let habitsRef = db.collection("users").document(user.uid).collection("habits")
         
+        habitsRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching habits: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.habits = documents.compactMap { document in
+                try? document.data(as: Habit.self)
+            }
+        }
+        
+    }
+    func countStreakCount(habit: Habit) {
         var daysDone = habit.daysDone
-        let today = Calendar.current.startOfDay(for: Date())
-        
-        print(" \(habit.name)\(daysDone)")
-        guard !habit.daysDone.isEmpty else {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
+
+        // Kontrollera om daysDone är tom
+        guard !daysDone.isEmpty else {
             habit.streakCount = 0
-            print(habit.streakCount)
             updateStreakCountToFirestore(habit: habit)
             return
         }
-        let sortedDays = habit.daysDone.sorted()
-        var currentStreak = 1
-        var maxStreak = 1
         
-        for i in 1..<sortedDays.count {
-            print("daysDone \(sortedDays[i])")
-            let previousDay = Calendar.current.date(byAdding: .day, value: -1, to: sortedDays[i])
-            
-            if Calendar.current.isDate(sortedDays[i-1], inSameDayAs: previousDay!){
-                currentStreak += 1
-            } else {
-                maxStreak = max(maxStreak, currentStreak)
-                currentStreak = 1
-            }
+        daysDone.sort()
+        
+        // Kontrollera om den senaste dagen är tidigare än igår
+        if let lastDay = daysDone.last, lastDay < yesterday {
+            habit.streakCount = 0
+            updateStreakCountToFirestore(habit: habit)
+            return
         }
-        maxStreak = max(maxStreak, currentStreak)
-        habit.streakCount = maxStreak
-        print("StreakCount +  \(habit.name) \(habit.streakCount)")
+        
+        var streakCount = 0
+        var checkDate = daysDone.last!  // Starta räkningen från den senaste dagen
+
+        // Räkna streak bakåt från checkDate
+        while daysDone.contains(where: { calendar.isDate($0, inSameDayAs: checkDate) }) {
+            streakCount += 1
+            guard let previousDay = calendar.date(byAdding: .day, value: -1, to: checkDate) else { break }
+            if !daysDone.contains(where: { calendar.isDate($0, inSameDayAs: previousDay) }) {
+                break
+            }
+            checkDate = previousDay
+        }
+        
+        // Uppdatera streakCount och spara till Firestore
+        habit.streakCount = streakCount
         updateStreakCountToFirestore(habit: habit)
     }
+    func last30Days() -> [Date]{
+        let today = Date()
+                let calendar = Calendar.current
+        return (0..<30).map { calendar.date(byAdding: .day, value: -$0, to: today)! }.reversed()
+    }
 }
+    
+

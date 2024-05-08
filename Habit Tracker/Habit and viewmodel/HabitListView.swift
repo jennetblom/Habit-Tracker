@@ -13,17 +13,20 @@ import FirebaseFirestoreSwift
 struct HabitListView: View {
     
     @StateObject var habitsViewModel = HabitsViewModel()
-    
+    @State var date = Date()
     
     var body: some View {
         
-        
+        ZStack{
+                        LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            //                        .edgesIgnoringSafeArea(.all)
+                            .ignoresSafeArea()
             VStack{
                 Text("What habits have you done today?")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding()
-                Text("\(checkDate())")
+                Text("\(date.formattedString())")
                 List{
                     ForEach(habitsViewModel.habits){ habit in
                         RowView(habit: habit, habitsViewModel: habitsViewModel)
@@ -33,11 +36,10 @@ struct HabitListView: View {
             .navigationTitle("What habits have you done today?")
             .onAppear() {
                 habitsViewModel.listenToFirestore()
-                
-                
             }
             
         }
+    }
     func checkDate() ->String {
         guard let date = habitsViewModel.habits.first?.formattedDate else {
             return "No date available"
