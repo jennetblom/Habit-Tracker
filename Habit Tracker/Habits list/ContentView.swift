@@ -45,9 +45,6 @@ struct SignInView : View {
     
     var body: some View{
         ZStack{
-//            Color(red: 240/255, green: 240/255, blue: 240/255)
-//                .ignoresSafeArea()
-            
             VStack{
                 TextField("Write your email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -63,7 +60,7 @@ struct SignInView : View {
                         .padding(5)
                         .foregroundColor(.white)
                 }.background(Color.blue)
-                .cornerRadius(10)
+                    .cornerRadius(10)
                 Button(action: {
                     signIn()
                 }) {
@@ -105,7 +102,7 @@ struct SignInView : View {
             }
         }
     }
-        
+    
 }
 
 

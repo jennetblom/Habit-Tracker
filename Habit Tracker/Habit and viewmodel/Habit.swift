@@ -17,10 +17,14 @@ class Habit : Codable, Identifiable {
     var streakCount : Int = 0
     @ServerTimestamp var date:Date? = nil
     var daysDone : [Date] = []
+    @ServerTimestamp var reminderTime: Date? = nil
     
-    init(name: String) {
+    
+    
+    init(name: String, reminderTime : Date) {
         self.name = name
         self.date = Date()
+        self.reminderTime = reminderTime
     }
     var formattedDate : String? {
         guard let date = date else {
@@ -34,12 +38,12 @@ class Habit : Codable, Identifiable {
         
         
         if let newDate = Calendar.current.date(byAdding: .day, value: numDays, to: date) {
-//            print("newDate: \(newDate)")
+            //            print("newDate: \(newDate)")
             return newDate
         } else {
             // Hantera fallet där nytt datum inte kan beräknas
             return Date()
         }
     }
-   
+    
 }

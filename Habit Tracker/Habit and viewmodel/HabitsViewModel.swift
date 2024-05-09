@@ -38,7 +38,7 @@ class HabitsViewModel : ObservableObject {
     }
     func updateDaysDone(habitDocumentRef : DocumentReference, done: Bool){
         let today = Calendar.current.startOfDay(for: Date())
-//        let today = Date()
+        //        let today = Date()
         
         if done {
             habitDocumentRef.updateData(["daysDone" : FieldValue.arrayUnion([today])])
@@ -55,12 +55,11 @@ class HabitsViewModel : ObservableObject {
         habitDocumentRef.updateData(["streakCount" : habit.streakCount])
     }
     
-    func saveNewHabitToFirestore (habitName : String) {
+    func saveNewHabitToFirestore (habit : Habit) {
         
         guard let user = auth.currentUser else {return}
         let habitsRef = db.collection("users").document(user.uid).collection("habits")
         
-        let habit = Habit(name: habitName)
         
         do{
             try habitsRef.addDocument(from: habit)
@@ -138,15 +137,13 @@ class HabitsViewModel : ObservableObject {
                 try? document.data(as: Habit.self)
             }
         }
-        
     }
     func countStreakCount(habit: Habit) {
         var daysDone = habit.daysDone
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
-
-        // Kontrollera om daysDone är tom
+        
         guard !daysDone.isEmpty else {
             habit.streakCount = 0
             updateStreakCountToFirestore(habit: habit)
@@ -155,7 +152,7 @@ class HabitsViewModel : ObservableObject {
         
         daysDone.sort()
         
-        // Kontrollera om den senaste dagen är tidigare än igår
+        
         if let lastDay = daysDone.last, lastDay < yesterday {
             habit.streakCount = 0
             updateStreakCountToFirestore(habit: habit)
@@ -163,9 +160,9 @@ class HabitsViewModel : ObservableObject {
         }
         
         var streakCount = 0
-        var checkDate = daysDone.last!  // Starta räkningen från den senaste dagen
-
-        // Räkna streak bakåt från checkDate
+        var checkDate = daysDone.last!
+        
+        
         while daysDone.contains(where: { calendar.isDate($0, inSameDayAs: checkDate) }) {
             streakCount += 1
             guard let previousDay = calendar.date(byAdding: .day, value: -1, to: checkDate) else { break }
@@ -175,15 +172,49 @@ class HabitsViewModel : ObservableObject {
             checkDate = previousDay
         }
         
-        // Uppdatera streakCount och spara till Firestore
         habit.streakCount = streakCount
         updateStreakCountToFirestore(habit: habit)
     }
     func last30Days() -> [Date]{
         let today = Date()
-                let calendar = Calendar.current
+        let calendar = Calendar.current
         return (0..<30).map { calendar.date(byAdding: .day, value: -$0, to: today)! }.reversed()
     }
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                print("Permission granted")
+            } else if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    func scheduleDailyReminder(habit : Habit) {
+        var reminderTime = habit.reminderTime
+        var habitName = habit.name
+        let content = UNMutableNotificationContent()
+        content.title = "Reminder"
+        content.body = "It's time to perform your habit: \(habitName)"
+        content.sound = UNNotificationSound.default
+        
+        // Skapa en trigger för att aktivera påminnelsen varje dag vid den angivna tiden
+        var dateComponents = Calendar.current.dateComponents([.hour, .minute], from: reminderTime ?? Date())
+        dateComponents.second = 0 // Sätt sekunder till 0 för att undvika problem med utlösningen
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        // Skapa en anmälningsbegäran med innehållet och triggern
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // Lägg till anmälningsbegäran i UNUserNotificationCenter
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling daily reminder: \(error.localizedDescription)")
+            } else {
+                print("Daily reminder scheduled successfully for habit: \(habitName)")
+            }
+        }
+    }
+    
 }
     
 
