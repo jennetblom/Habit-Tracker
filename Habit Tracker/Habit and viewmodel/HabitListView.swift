@@ -18,9 +18,8 @@ struct HabitListView: View {
     var body: some View {
         
         ZStack{
-                        LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            //                        .edgesIgnoringSafeArea(.all)
-                            .ignoresSafeArea()
+            LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea()
             VStack{
                 Text("What habits have you done today?")
                     .font(.title)
@@ -46,7 +45,7 @@ struct HabitListView: View {
         }
         return date
     }
-
+    
 }
 
 struct RowView: View {
@@ -60,9 +59,7 @@ struct RowView: View {
             Text("\(habit.streakCount)")
             Spacer()
             Button(action: {
-                
                 habitsViewModel.toggle(habit: habit)
-                
             }) {
                 Image(systemName: habit.done ?  "heart.square" : "square")
                     .resizable()
@@ -70,7 +67,6 @@ struct RowView: View {
                     .frame(width: 40)
                     .foregroundStyle(checkColorImage(imageName: habit.done ? "heart.square" : "square"), .black)
             }
-            
         }.onAppear(){
         }
     }

@@ -10,27 +10,44 @@ import SwiftUI
 struct AddHabitView: View {
     @StateObject var habitsViewModel = HabitsViewModel()
     @State var habitName : String = ""
+    @State var selectedDate = Date()
+    @State var newHabit: Habit?
     
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.top)
-//                .ignoresSafeArea()
-                
+            
             VStack{
                 TextField("What is the habit called?", text: $habitName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                
+                DatePicker("Choose a time for the reminder", selection: $selectedDate, displayedComponents: .hourAndMinute)
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(20.0)
+                    .padding()
+                    .foregroundColor(.gray)
+                
+                
+                
                 Button("Save habit") {
                     saveHabit()
                 }
                 .buttonStyle(CustomButtonStyle(foregroundColor: .white, backgroundColor: .green, cornerRadius: 10))
             }
+        }.onAppear {
+            habitsViewModel.requestNotificationPermission()
         }
     }
     func saveHabit() {
         if !habitName.isEmpty {
-            habitsViewModel.saveNewHabitToFirestore(habitName: habitName)
+            
+            let newHabit = Habit(name: habitName, reminderTime: selectedDate)
+            
+            habitsViewModel.saveNewHabitToFirestore(habit : newHabit)
+            habitsViewModel.scheduleDailyReminder(habit: newHabit)
             habitName = ""
         } else {
             print("empty")
