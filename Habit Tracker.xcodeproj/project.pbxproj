@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D27FD0C2BDBAD0F004A1DF7 /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27FD0B2BDBAD0F004A1DF7 /* AddHabitView.swift */; };
+		5D27FD0E2BDBB09F004A1DF7 /* HabitsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27FD0D2BDBB09F004A1DF7 /* HabitsSummaryView.swift */; };
+		5D27FD102BDBCD8D004A1DF7 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27FD0F2BDBCD8D004A1DF7 /* HabitListView.swift */; };
+		5D27FD122BDD3B10004A1DF7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27FD112BDD3B10004A1DF7 /* CalendarView.swift */; };
+		5DBDA71F2BD7E8D400E44685 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDA71E2BD7E8D400E44685 /* Habit.swift */; };
+		5DBDA7222BD7EAD800E44685 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5DBDA7212BD7EAD800E44685 /* FirebaseAuth */; };
+		5DBDA7242BD7EAD800E44685 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5DBDA7232BD7EAD800E44685 /* FirebaseFirestore */; };
+		5DBDA7262BD7EAD800E44685 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5DBDA7252BD7EAD800E44685 /* FirebaseFirestoreSwift */; };
+		5DBDA72E2BD7EDB900E44685 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DBDA72D2BD7EDB900E44685 /* GoogleService-Info.plist */; };
+		5DBDF9122BDA6B6B008BFD07 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDF9112BDA6B6B008BFD07 /* HabitsViewModel.swift */; };
 		5DE854022BD65F9C00D176F6 /* Habit_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE854012BD65F9C00D176F6 /* Habit_TrackerApp.swift */; };
 		5DE854042BD65F9C00D176F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE854032BD65F9C00D176F6 /* ContentView.swift */; };
 		5DE854062BD65F9E00D176F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DE854052BD65F9E00D176F6 /* Assets.xcassets */; };
@@ -14,6 +24,7 @@
 		5DE854132BD65F9F00D176F6 /* Habit_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE854122BD65F9F00D176F6 /* Habit_TrackerTests.swift */; };
 		5DE8541D2BD65F9F00D176F6 /* Habit_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8541C2BD65F9F00D176F6 /* Habit_TrackerUITests.swift */; };
 		5DE8541F2BD65F9F00D176F6 /* Habit_TrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8541E2BD65F9F00D176F6 /* Habit_TrackerUITestsLaunchTests.swift */; };
+		5DF869362BE8F3FF00828BEF /* Extension Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF869352BE8F3FF00828BEF /* Extension Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +45,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D27FD0B2BDBAD0F004A1DF7 /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		5D27FD0D2BDBB09F004A1DF7 /* HabitsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsSummaryView.swift; sourceTree = "<group>"; };
+		5D27FD0F2BDBCD8D004A1DF7 /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
+		5D27FD112BDD3B10004A1DF7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		5DBDA71E2BD7E8D400E44685 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		5DBDA72D2BD7EDB900E44685 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5DBDF9112BDA6B6B008BFD07 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
 		5DE853FE2BD65F9C00D176F6 /* Habit Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habit Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE854012BD65F9C00D176F6 /* Habit_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit_TrackerApp.swift; sourceTree = "<group>"; };
 		5DE854032BD65F9C00D176F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +62,7 @@
 		5DE854182BD65F9F00D176F6 /* Habit TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habit TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE8541C2BD65F9F00D176F6 /* Habit_TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit_TrackerUITests.swift; sourceTree = "<group>"; };
 		5DE8541E2BD65F9F00D176F6 /* Habit_TrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit_TrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5DF869352BE8F3FF00828BEF /* Extension Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Date.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DBDA7222BD7EAD800E44685 /* FirebaseAuth in Frameworks */,
+				5DBDA7242BD7EAD800E44685 /* FirebaseFirestore in Frameworks */,
+				5DBDA7262BD7EAD800E44685 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +93,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DDD531E2BE0E33600A2978F /* Create New Habits */ = {
+			isa = PBXGroup;
+			children = (
+				5D27FD0B2BDBAD0F004A1DF7 /* AddHabitView.swift */,
+			);
+			path = "Create New Habits";
+			sourceTree = "<group>";
+		};
+		5DDD531F2BE0E34F00A2978F /* Habits list */ = {
+			isa = PBXGroup;
+			children = (
+				5DE854032BD65F9C00D176F6 /* ContentView.swift */,
+			);
+			path = "Habits list";
+			sourceTree = "<group>";
+		};
+		5DDD53202BE0E35C00A2978F /* Summary of habits */ = {
+			isa = PBXGroup;
+			children = (
+				5D27FD0D2BDBB09F004A1DF7 /* HabitsSummaryView.swift */,
+			);
+			path = "Summary of habits";
+			sourceTree = "<group>";
+		};
 		5DE853F52BD65F9C00D176F6 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +141,14 @@
 			isa = PBXGroup;
 			children = (
 				5DE854012BD65F9C00D176F6 /* Habit_TrackerApp.swift */,
-				5DE854032BD65F9C00D176F6 /* ContentView.swift */,
+				5DF869342BE7C6C500828BEF /* Habit and viewmodel */,
+				5DBDA72D2BD7EDB900E44685 /* GoogleService-Info.plist */,
+				5DDD531E2BE0E33600A2978F /* Create New Habits */,
+				5DDD531F2BE0E34F00A2978F /* Habits list */,
+				5DDD53202BE0E35C00A2978F /* Summary of habits */,
 				5DE854052BD65F9E00D176F6 /* Assets.xcassets */,
 				5DE854072BD65F9E00D176F6 /* Preview Content */,
+				5DF869352BE8F3FF00828BEF /* Extension Date.swift */,
 			);
 			path = "Habit Tracker";
 			sourceTree = "<group>";
@@ -106,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				5DE854082BD65F9E00D176F6 /* Preview Assets.xcassets */,
+				5D27FD112BDD3B10004A1DF7 /* CalendarView.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -127,6 +179,16 @@
 			path = "Habit TrackerUITests";
 			sourceTree = "<group>";
 		};
+		5DF869342BE7C6C500828BEF /* Habit and viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				5DBDA71E2BD7E8D400E44685 /* Habit.swift */,
+				5D27FD0F2BDBCD8D004A1DF7 /* HabitListView.swift */,
+				5DBDF9112BDA6B6B008BFD07 /* HabitsViewModel.swift */,
+			);
+			path = "Habit and viewmodel";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +205,11 @@
 			dependencies = (
 			);
 			name = "Habit Tracker";
+			packageProductDependencies = (
+				5DBDA7212BD7EAD800E44685 /* FirebaseAuth */,
+				5DBDA7232BD7EAD800E44685 /* FirebaseFirestore */,
+				5DBDA7252BD7EAD800E44685 /* FirebaseFirestoreSwift */,
+			);
 			productName = "Habit Tracker";
 			productReference = 5DE853FE2BD65F9C00D176F6 /* Habit Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +282,9 @@
 				Base,
 			);
 			mainGroup = 5DE853F52BD65F9C00D176F6;
+			packageReferences = (
+				5DBDA7202BD7EAD800E44685 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 5DE853FF2BD65F9C00D176F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +303,7 @@
 			files = (
 				5DE854092BD65F9E00D176F6 /* Preview Assets.xcassets in Resources */,
 				5DE854062BD65F9E00D176F6 /* Assets.xcassets in Resources */,
+				5DBDA72E2BD7EDB900E44685 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +328,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D27FD0E2BDBB09F004A1DF7 /* HabitsSummaryView.swift in Sources */,
+				5DBDA71F2BD7E8D400E44685 /* Habit.swift in Sources */,
+				5D27FD122BDD3B10004A1DF7 /* CalendarView.swift in Sources */,
 				5DE854042BD65F9C00D176F6 /* ContentView.swift in Sources */,
 				5DE854022BD65F9C00D176F6 /* Habit_TrackerApp.swift in Sources */,
+				5DBDF9122BDA6B6B008BFD07 /* HabitsViewModel.swift in Sources */,
+				5DF869362BE8F3FF00828BEF /* Extension Date.swift in Sources */,
+				5D27FD0C2BDBAD0F004A1DF7 /* AddHabitView.swift in Sources */,
+				5D27FD102BDBCD8D004A1DF7 /* HabitListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +660,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5DBDA7202BD7EAD800E44685 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.24.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5DBDA7212BD7EAD800E44685 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DBDA7202BD7EAD800E44685 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		5DBDA7232BD7EAD800E44685 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DBDA7202BD7EAD800E44685 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		5DBDA7252BD7EAD800E44685 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DBDA7202BD7EAD800E44685 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5DE853F62BD65F9C00D176F6 /* Project object */;
 }
