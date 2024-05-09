@@ -14,12 +14,12 @@ struct HabitsSummaryView: View {
     var body: some View {
         ZStack(alignment: .top) {
             // Gradient-färg som en header
-            LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .frame(height: 200)
+            LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 2))
+                .frame(height: 210)
             
             VStack {
                 // Texten "Good job!" som en header
-                Text("Here's a summary of your achievements! Keep up the good work!")
+                Text("Here's a summary of your achievements! \nKeep up the good work!")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -33,6 +33,7 @@ struct HabitsSummaryView: View {
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
+                .padding()
                 
                 if habitsViewModel.habits.indices.contains(selectedHabitIndex) {
                     SummaryView(habit: habitsViewModel.habits[selectedHabitIndex], habitsViewModel: habitsViewModel)
@@ -40,7 +41,7 @@ struct HabitsSummaryView: View {
                     Text("No habit selected")
                 }
             }
-            .padding(.top, 70) // Justera om du vill ändra avståndet mellan text och gradient
+            .padding(.top, 60) // Justera om du vill ändra avståndet mellan text och gradient
         }
         .ignoresSafeArea() // Ignorera safe area för att fylla hela skärmen med färgen
         .onAppear {
