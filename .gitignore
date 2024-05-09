@@ -1,3 +1,6 @@
+*.xcuserstate
+xcuserdata/build/
+DerivedData/.DS_Store
 Habit Tracker.xcodeproj/project.xcworkspace/xcuserdata/jennet.xcuserdatad/UserInterfaceState.xcuserstate
 Habit Tracker.xcodeproj/project.xcworkspace/xcuserdata/jennet.xcuserdatad/UserInterfaceState.xcuserstate
 
